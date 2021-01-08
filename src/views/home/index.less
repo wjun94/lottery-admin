@@ -1,0 +1,97 @@
+@blue: #3590ff;
+@gray: #031529;
+
+.home-page {
+    font-size: 14px;
+
+    .el-menu {
+        height: 100%;
+        text-align: left;
+        overflow: hidden;
+
+        &:not(.el-menu--collapse) {
+            width: 200px;
+            min-height: 400px;
+        }
+
+        .el-menu-item,
+        .el-submenu {
+
+            span {
+                display: inline-block;
+                margin-top: 2px;
+            }
+        }
+
+        .logo {
+            height: 32px;
+            line-height: 32px;
+            padding: 0 10px;
+            background: rgba(255, 255, 255, 0.2);
+            margin: 16px;
+            color: white;
+        }
+    }
+
+
+
+    .el-submenu {
+        >ul li {
+            background-color: #010d17 !important;
+        }
+
+        .is-active {
+            background-color: @blue  !important;
+            color: #fff !important;
+        }
+    }
+
+    .el-aside {
+        color: #333;
+    }
+
+    .el-main {
+        background-color: #f0f2f5;
+        padding: 0;
+
+        .main {
+            padding: 20px;
+
+            >div {
+                background-color: white;
+                overflow: hidden;
+                min-height: calc(100vh - 100px);
+            }
+        }
+
+        header {
+            background-color: white;
+            height: 60px;
+            padding: 0 20px;
+            color: #333;
+
+            .el-breadcrumb {
+                background-color: @gray;
+            }
+
+            .el-icon-s-fold {
+                font-size: 16px;
+                cursor: pointer;
+
+                &:hover {
+                    color: @blue;
+                }
+            }
+        }
+
+        >main {
+            background-color: white;
+            min-height: calc(100vh - 190px);
+            padding: 20px;
+        }
+    }
+
+    .el-footer {
+        line-height: 60px;
+    }
+}
