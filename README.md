@@ -1,24 +1,7 @@
-# vue-ts-cli
+# 房产信息后台管理系统
 
-## Project setup
+## 启动项目
+```bash
+yarn i
+npm start
 ```
-yarn install
-```
-
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
-
-### Compiles and minifies for production
-```
-yarn build
-```
-
-### Lints and fixes files
-```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).

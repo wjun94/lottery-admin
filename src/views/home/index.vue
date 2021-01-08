@@ -68,6 +68,12 @@ export default class Home extends Vue {
   private isCollapse = false;
   private routes = routes[1].children;
 
+  created() {
+    if (!this.$utils.getCookie("token")) {
+      this.$router.push({ path: "/login" });
+    }
+  }
+
   private onIcon() {
     this.isCollapse = !this.isCollapse;
   }

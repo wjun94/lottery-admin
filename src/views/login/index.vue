@@ -19,17 +19,18 @@
             <label>
               <i class="el-icon-user" />
             </label>
-            <el-input v-model="form.name"></el-input>
+            <el-input placeholder="请输入手机号" v-model="form.phone" />
           </el-form-item>
           <el-form-item prop="pwd">
             <label>
               <i class="el-icon-lock" />
             </label>
-            <el-input type="password" v-model="form.pwd"></el-input>
+            <el-input placeholder="请输入密码" type="password" v-model="form.pwd" />
           </el-form-item>
           <el-form-item>
             <el-button size="small" type="primary" @click="submitForm"
-              >登录</el-button>
+              >登录</el-button
+            >
           </el-form-item>
         </el-form>
         <footer>
@@ -42,27 +43,35 @@
 
 <script lang='ts'>
 import { Vue } from "vue-class-component";
+
 export default class Login extends Vue {
   form = {
-    name: "",
+    phone: "",
     pwd: "",
   };
   rules = {
-    name: [{ required: true, message: "请输入账号", trigger: "blur" }],
+    phone: [{ required: true, message: "请输入账号", trigger: "blur" }],
     pwd: [
       { required: true, message: "请输入账号", trigger: "blur" },
-      { min: 6, message: "密码不能少于6位", trigger: "blur" },
+      { min: 5, message: "密码不能少于5位", trigger: "blur" },
       { max: 15, message: "密码不能大于15位", trigger: "blur" },
     ],
   };
 
+  created() {
+    if (this.$utils.getCookie('token')) {
+      this.$router.push({path: '/'})
+    }
+  }
+
   submitForm() {
     const refs: any = this.$refs;
-    refs["formEl"].validate((valid: any) => {
+    refs["formEl"].validate(async (valid: boolean, values: object) => {
       if (valid) {
-        console.log(valid)
+        const res = await this.$api.login(this.form);
+        this.$utils.setCookie('token', res)
+        this.$router.push({path: '/'})
       } else {
-        console.log("error submit!!");
         return false;
       }
     });
