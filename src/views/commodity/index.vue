@@ -35,7 +35,7 @@ import HelloWorld from "@/components/HelloWorld.vue";
 export default class Home extends Vue {
   private selectedKeys: string[] = ["0"]; // 选中tab
   private collapsed = false; // 显示/隐藏左边tab
-  private tabs: string[] = ["商品管理", "订单管理", "会员管理"];
+  private tabs: string[] = ["房产管理", "订单管理", "会员管理"];
 
   private onMenu(keys: any) {
     const { key } = keys;

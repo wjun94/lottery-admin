@@ -44,7 +44,7 @@ export default class Server {
         url,
         baseURL: '/api/v3',
         timeout: 30000,
-        params: method === 'get' ? params : {},
+        params: ['get', 'delete'].includes(method) ? params : {},
         data: params,
         headers: {
           'Authorization': utils.getCookie('token'),
@@ -59,9 +59,10 @@ export default class Server {
         if (res.data.message === 'success') {
           resolve(typeof res.data === 'object' ? res.data : JSON.parse(res.data))
         } else {
-          ElMessage.error(res.data.err_msg || '接口异常');
+          ElMessage.error(res.data.message || '接口异常');
         }
       }, error => {
+        ElMessage.error(error.response.data.message || '接口异常');
         if (error.response) {
           reject(error.response.data)
         } else {

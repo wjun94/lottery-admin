@@ -19,3 +19,12 @@ body,
 p {
     margin: 0;
 }
+
+.txt-hide {
+    /*超出的部分隐藏起来。*/
+    overflow: hidden;
+    /*不显示的地方用省略号...代替*/
+    white-space: nowrap;
+    /* 支持 IE */
+    text-overflow: ellipsis;
+}

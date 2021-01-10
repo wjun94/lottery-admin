@@ -28,7 +28,7 @@ class Utils {
      * @todo 删除cookie
      * @param {*} key
      */
-    delCookies(key) {
+    delCookie(key) {
         const exp = new Date()
         exp.setTime(exp.getTime() - 1)
         const cval = this.getCookie(key)

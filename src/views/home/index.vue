@@ -7,10 +7,10 @@
       mode="vertical"
       :unique-opened="true"
       :router="true"
-      :collapse-transition="false"
+      :collapse-transition="true"
       :default-openeds="['0']"
     >
-      <div class="logo">
+      <div class="info txt-hide">
         <span>欢迎...</span>
       </div>
       <template v-for="(item, i) of routes" :key="item.name">
@@ -46,7 +46,7 @@
             :class="[!isCollapse ? 'el-icon-s-fold' : 'el-icon-s-unfold']"
             style="margin-right: 15px"
           ></i>
-          <el-button>退出</el-button>
+          <el-button @click="loginout">退出</el-button>
         </header>
         <div class="main">
           <!-- <el-breadcrumb separator="/">
@@ -76,6 +76,15 @@ export default class Home extends Vue {
 
   private onIcon() {
     this.isCollapse = !this.isCollapse;
+  }
+
+  /**
+   * @todo 退出登录
+   */
+  private loginout() {
+    this.$api.loginout()
+    this.$utils.delCookie('token')
+    this.$router.push({ path: "/login" });
   }
 }
 </script>
