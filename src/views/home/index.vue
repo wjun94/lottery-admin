@@ -6,9 +6,9 @@
       :collapse="isCollapse"
       mode="vertical"
       :unique-opened="true"
+      :default-active="'/'"
       :router="true"
       :collapse-transition="true"
-      :default-openeds="['0']"
     >
       <div class="info txt-hide">
         <span>欢迎...</span>
@@ -55,7 +55,6 @@
           <router-view name="content" />
         </div>
       </el-main>
-      <!-- <el-footer> 后台管理系统 ©2020 </el-footer> -->
     </el-container>
   </el-container>
 </template>
@@ -68,7 +67,7 @@ export default class Home extends Vue {
   private isCollapse = false;
   private routes = routes[1].children;
 
-  created() {
+  async created() {
     if (!this.$utils.getCookie("token")) {
       this.$router.push({ path: "/login" });
     }
@@ -82,8 +81,8 @@ export default class Home extends Vue {
    * @todo 退出登录
    */
   private loginout() {
-    this.$api.loginout()
-    this.$utils.delCookie('token')
+    this.$api.loginout();
+    this.$utils.delCookie("token");
     this.$router.push({ path: "/login" });
   }
 }

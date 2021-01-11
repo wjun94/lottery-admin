@@ -21,6 +21,16 @@ export class API extends Server {
     const result = await this.axios('delete', `/loginout`, params);
     return result.data
   }
+
+  /**
+   *  @todo 获取列表
+   *  @method get
+   *  @return {promise}
+   */
+  async lotteryList(params = {}) {
+    const result = await this.axios('get', `/lotteryList`, params);
+    return result
+  }
 }
 
 export default new API();

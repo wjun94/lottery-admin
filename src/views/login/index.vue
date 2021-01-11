@@ -28,7 +28,7 @@
             <el-input placeholder="请输入密码" type="password" v-model="form.pwd" />
           </el-form-item>
           <el-form-item>
-            <el-button size="small" type="primary" @click="submitForm"
+            <el-button type="primary" @click="submitForm"
               >登录</el-button
             >
           </el-form-item>

@@ -21,13 +21,13 @@ export const routes: Array<RouteRecordRaw> = [
       // 子路由，子页面使用router-view
       {
         path: '/',
-        name: 'Commodity',
+        name: 'Lottery',
         meta: { title: '房产管理', icon: 'el-icon-shopping-bag-2' },
         // route level code-splitting
         // this generates a separate chunk (about.[hash].js) for this route
         // which is lazy-loaded when the route is visited.
         components: {
-          content: () => import(/* webpackChunkName: "about" */ '@/views/commodity/index.vue')
+          content: () => import(/* webpackChunkName: "lottery" */ '@/views/lottery/index.vue')
         }
       },
       {

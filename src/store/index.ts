@@ -1,12 +1,8 @@
 import { createStore } from 'vuex'
+import lottery from './lottery'
 
 export default createStore({
-  state: {
-  },
-  mutations: {
-  },
-  actions: {
-  },
   modules: {
+    lottery,
   }
 })
