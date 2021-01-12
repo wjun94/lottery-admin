@@ -1,11 +1,11 @@
 <template>
   <div class="lottery">
     <header class="border-btm page">
-      <Select />
+      <Select :date="date" @onNodeClick="onSelect" />
     </header>
     <main class="page">
       <div>
-        <el-button class="add-btn">新增</el-button>
+        <el-button class="add-btn" icon="el-icon-plus">新增</el-button>
       </div>
       <el-table :data="list" style="width: 100%">
         <el-table-column prop="createAt" label="创建时间" />
@@ -38,7 +38,7 @@
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
-import { mapActions, mapState } from "vuex";
+import { mapActions, mapState, mapMutations } from "vuex";
 import Select from "@/components/select/index.vue";
 
 @Options({
@@ -46,10 +46,11 @@ import Select from "@/components/select/index.vue";
     Select,
   },
   computed: {
-    ...mapState("lottery", ["list", "total", "pageSize"]),
+    ...mapState("lottery", ["list", "total", "pageSize", "date"]),
   },
   methods: {
     ...mapActions("lottery", ["getList", "setPageSize"]),
+    ...mapMutations("lottery", ["setDate"]),
   },
 })
 export default class Home extends Vue {
@@ -58,6 +59,10 @@ export default class Home extends Vue {
   private tabs: string[] = ["房产管理", "订单管理", "会员管理"];
 
   mounted() {
+    const end = new Date();
+    const start = new Date();
+    start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
+    this.setDate([start, end]);
     this.getList();
   }
 
@@ -77,9 +82,8 @@ export default class Home extends Vue {
     this.getList({ current });
   }
 
-  private onMenu(keys: any) {
-    const { key } = keys;
-    this.$router.push(key === "0" ? "/" : key === "1" ? "orderList" : "member");
+  onSelect(node: any) {
+    this.getList(node);
   }
 }
 </script>

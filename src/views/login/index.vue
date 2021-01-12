@@ -25,12 +25,14 @@
             <label>
               <i class="el-icon-lock" />
             </label>
-            <el-input placeholder="请输入密码" type="password" v-model="form.pwd" />
+            <el-input
+              placeholder="请输入密码"
+              type="password"
+              v-model="form.pwd"
+            />
           </el-form-item>
           <el-form-item>
-            <el-button type="primary" @click="submitForm"
-              >登录</el-button
-            >
+            <el-button type="primary" @click="submitForm">登录</el-button>
           </el-form-item>
         </el-form>
         <footer>
@@ -59,18 +61,18 @@ export default class Login extends Vue {
   };
 
   created() {
-    if (this.$utils.getCookie('token')) {
-      this.$router.push({path: '/'})
+    if (this.$utils.getCookie("token")) {
+      this.$router.push({ path: "/" });
     }
   }
 
   submitForm() {
     const refs: any = this.$refs;
-    refs["formEl"].validate(async (valid: boolean, values: object) => {
+    refs["formEl"].validate(async (valid: boolean) => {
       if (valid) {
         const res = await this.$api.login(this.form);
-        this.$utils.setCookie('token', res)
-        this.$router.push({path: '/'})
+        this.$utils.setCookie("token", res);
+        this.$router.push({ path: "/" });
       } else {
         return false;
       }

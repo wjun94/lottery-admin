@@ -7,6 +7,7 @@ declare module '@vue/runtime-core' {
         $store: any;
         getList: Function;  // 获取列表
         setPageSize: Function;  // 设置页码
+        setDate: Function;    // 设置选择日期
     }
 }
 

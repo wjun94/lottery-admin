@@ -6,6 +6,7 @@ const lottery = {
         list: [],   // 列表数据
         total: 1,    // 页码
         pageSize: 10,
+        date: [new Date(), new Date()], // 搜索时间
     }),
     mutations: {
         getList(state: any, data: ResultPageJSON) {
@@ -14,6 +15,9 @@ const lottery = {
         },
         setPageSize(state: any, pageSize: number) {
             state.pageSize = pageSize
+        },
+        setDate(state: any, date: Date[]) {
+            state.date = date
         }
     },
     actions: {
@@ -21,9 +25,9 @@ const lottery = {
             if (params && params.pageSize) {
                 context.commit('setPageSize', params.pageSize)
             }
-            const { pageSize } = context.state
-            console.log(pageSize)
-            const result = await window.$api.lotteryList({ ...params, pageSize });
+            const { pageSize, date } = context.state
+            const [starAt, endAt] = date
+            const result = await window.$api.lotteryList({ starAt, endAt, ...params, pageSize });
             context.commit('getList', result)
         }
     },
