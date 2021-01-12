@@ -6,7 +6,7 @@
       :collapse="isCollapse"
       mode="vertical"
       :unique-opened="true"
-      :default-active="'/'"
+      :default-active="'/lottery/list'"
       :router="true"
       :collapse-transition="true"
     >
@@ -16,23 +16,23 @@
       <template v-for="(item, i) of routes" :key="item.name">
         <el-submenu v-if="item.children" :index="item.path">
           <template #title>
-            <i :class="item.meta.icon"></i>
-            <span>{{ item.meta.title }}</span>
+            <i :class="item.icon"></i>
+            <span>{{ item.name }}</span>
           </template>
           <el-menu-item-group>
             <el-menu-item
               v-for="(child, idx) of item.children"
               :key="i + '-' + idx"
               :index="child.path"
-              >选项1
+              >{{ child.name }}
             </el-menu-item>
           </el-menu-item-group>
         </el-submenu>
 
         <el-menu-item v-else :index="item.path">
-          <i :class="item.meta.icon"></i>
+          <i :class="item.icon"></i>
           <template #title
-            ><span>{{ item.meta.title }}</span></template
+            ><span>{{ item.name }}</span></template
           >
         </el-menu-item>
       </template>
@@ -52,7 +52,7 @@
           <!-- <el-breadcrumb separator="/">
             <el-breadcrumb-item>首页</el-breadcrumb-item>
           </el-breadcrumb> -->
-          <router-view name="content" />
+          <router-view name="content"></router-view>
         </div>
       </el-main>
     </el-container>
@@ -61,11 +61,60 @@
 
 <script lang='ts'>
 import { Vue } from "vue-class-component";
-import { routes } from "@/router";
 
 export default class Home extends Vue {
   private isCollapse = false;
-  private routes = routes[1].children;
+  private routes = [
+    // 子路由，子页面使用router-view
+    {
+      path: "/lottery",
+      name: "房产管理",
+      icon: "el-icon-office-building",
+      children: [
+        {
+          path: "/lottery/list",
+          name: "房产列表",
+        },
+      ],
+    },
+    {
+      path: "/ad",
+      name: "广告管理",
+      icon: "el-icon-data-board",
+      children: [
+        {
+          path: "/ad/list",
+          name: "广告列表",
+        },
+      ],
+    },
+    {
+      path: "/member",
+      name: "会员管理",
+      icon: "el-icon-user",
+      children: [
+        {
+          path: "/member/list",
+          name: "会员列表",
+        },
+      ],
+    },
+    {
+      path: "/power",
+      name: "账号权限",
+      icon: "el-icon-lock",
+      children: [
+        {
+          path: "/power/info",
+          name: "个人信息",
+        },
+        {
+          path: "/power/roles",
+          name: "角色管理",
+        },
+      ],
+    },
+  ];
 
   async created() {
     if (!this.$utils.getCookie("token")) {

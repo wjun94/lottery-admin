@@ -1,70 +1,92 @@
-import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
+import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
 import Home from '@/views/home/index.vue'
 
 export const routes: Array<RouteRecordRaw> = [
   {
     path: '/login',
-    name: 'Login',
-    meta: { title: '登录' },
     components: {
-      main: () => import(/* webpackChunkName: "about" */ '../views/login/index.vue')
+      main: () => import(/* webpackChunkName: "login" */ '@/views/login/index.vue')
     }
   },
   {
     path: '/',
-    name: 'Home',
-    meta: { title: '主页' },
+    redirect: '/lottery/list',
+  },
+  {
+    path: '/lottery',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
     components: {
-      main: Home,
+      main: () => import(/* webpackChunkName: "home" */ '@/views/home/index.vue'),
     },
     children: [
-      // 子路由，子页面使用router-view
       {
-        path: '/',
-        name: 'Lottery',
-        meta: { title: '房产管理', icon: 'el-icon-shopping-bag-2' },
-        // route level code-splitting
-        // this generates a separate chunk (about.[hash].js) for this route
-        // which is lazy-loaded when the route is visited.
+        path: 'edit',
         components: {
-          content: () => import(/* webpackChunkName: "lottery" */ '@/views/lottery/index.vue')
-        }
-      },
-      {
-        path: '/member',
-        name: 'Member',
-        meta: { title: '会员管理', icon: 'el-icon-user' },
-        // route level code-splitting
-        // this generates a separate chunk (about.[hash].js) for this route
-        // which is lazy-loaded when the route is visited.
-        components: {
-          content: () => import(/* webpackChunkName: "about" */ '@/views/member/index.vue')
+          content: () => import(/* webpackChunkName: "lottery-edit" */ '@/views/lottery-edit/index.vue')
         },
-        children: [
-          {
-            path: '/orderList1',
-            name: 'OrderList1',
-            meta: { title: '订单列表' },
-            components: {
-              content: () => import(/* webpackChunkName: "about" */ '@/views/order-list/index.vue')
-            }
-          }
-        ]
       },
       {
-        path: '/orderList',
-        name: 'OrderList',
-        meta: { title: '订单列表', icon: 'el-icon-s-order' },
+        path: 'list',
         components: {
-          content: () => import(/* webpackChunkName: "about" */ '@/views/order-list/index.vue')
-        }
+          content: () => import(/* webpackChunkName: "lottery-list" */ '@/views/lottery-list/index.vue')
+        },
+      },
+    ]
+  },
+  {
+    path: '/ad',
+    components: {
+      main: () => import(/* webpackChunkName: "home" */ '@/views/home/index.vue'),
+    },
+    children: [
+      {
+        path: 'list',
+        components: {
+          content: () => import(/* webpackChunkName: "ad-list" */ '@/views/ad-list/index.vue')
+        },
+      }
+    ]
+  },
+  {
+    path: '/member',
+    components: {
+      main: () => import(/* webpackChunkName: "home" */ '@/views/home/index.vue'),
+    },
+    children: [
+      {
+        path: 'list',
+        components: {
+          content: () => import(/* webpackChunkName: "member-list" */ '@/views/member-list/index.vue')
+        },
+      }
+    ]
+  },
+  {
+    path: '/power',
+    components: {
+      main: () => import(/* webpackChunkName: "home" */ '@/views/home/index.vue'),
+    },
+    children: [
+      {
+        path: 'info',
+        components: {
+          content: () => import(/* webpackChunkName: "power-info" */ '@/views/power-info/index.vue')
+        },
+      },
+      {
+        path: 'roles',
+        components: {
+          content: () => import(/* webpackChunkName: "power-info" */ '@/views/power-roles/index.vue')
+        },
       }
     ]
   },
 ]
 
 const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
+  history: createWebHashHistory(process.env.BASE_URL),
   routes
 })
 

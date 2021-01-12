@@ -26,15 +26,10 @@ class Utils {
 
     /**
      * @todo 删除cookie
-     * @param {*} key
+     * @param {*} name
      */
-    delCookie(key) {
-        const exp = new Date()
-        exp.setTime(exp.getTime() - 1)
-        const cval = this.getCookie(key)
-        if (cval != null) {
-            document.cookie = `${key}=${cval};expires=${exp.toGMTString()}`
-        }
+    delCookie(name) {
+        this.setCookie(name, "", -1);
     }
 }
 

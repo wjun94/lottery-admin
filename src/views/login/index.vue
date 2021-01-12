@@ -62,7 +62,7 @@ export default class Login extends Vue {
 
   created() {
     if (this.$utils.getCookie("token")) {
-      this.$router.push({ path: "/" });
+      this.$router.push({ path: "/lottery/list" });
     }
   }
 
@@ -72,7 +72,7 @@ export default class Login extends Vue {
       if (valid) {
         const res = await this.$api.login(this.form);
         this.$utils.setCookie("token", res);
-        this.$router.push({ path: "/" });
+        this.$router.push({ path: "/lottery/list" });
       } else {
         return false;
       }

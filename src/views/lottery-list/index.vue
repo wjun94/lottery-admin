@@ -5,7 +5,9 @@
     </header>
     <main class="page">
       <div>
-        <el-button class="add-btn" icon="el-icon-plus">新增</el-button>
+        <el-button class="add-btn" icon="el-icon-plus" @click="onAdd"
+          >新增</el-button
+        >
       </div>
       <el-table :data="list" style="width: 100%">
         <el-table-column prop="createAt" label="创建时间" />
@@ -86,6 +88,10 @@ export default class Home extends Vue {
   onSelect(node: any) {
     this.setDate(node.date);
     this.getList(node);
+  }
+
+  onAdd() {
+    this.$router.push({ path: "edit" });
   }
 }
 </script>
