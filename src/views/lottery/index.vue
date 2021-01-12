@@ -9,6 +9,7 @@
       </div>
       <el-table :data="list" style="width: 100%">
         <el-table-column prop="createAt" label="创建时间" />
+        <el-table-column prop="lotAt" label="摇号时间" />
         <el-table-column prop="name" label="项目名称" />
         <el-table-column prop="src" label="网站" />
         <el-table-column prop="status" label="状态" width="180" />
@@ -83,6 +84,7 @@ export default class Home extends Vue {
   }
 
   onSelect(node: any) {
+    this.setDate(node.date);
     this.getList(node);
   }
 }

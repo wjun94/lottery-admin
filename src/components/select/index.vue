@@ -18,9 +18,7 @@
           :label="item"
           :value="i === 0 ? '' : item"
           :key="item"
-        ></el-option>
-        <!-- <el-option label="已摇号" value="已摇号"></el-option> -->
-        <!-- <el-option label="不需要摇号" value="不需要摇号"></el-option> -->
+        />
       </el-select>
     </el-form-item>
     <el-form-item label="创建时间">
@@ -64,15 +62,7 @@ export default {
       const refs = this.$refs;
       refs["selectForm"].validate(async (valid) => {
         if (valid) {
-          console.log(this.formInline);
-          const { date, name, status } = this.formInline;
-          const [starAt, endAt] = date;
-          this.$emit("on-node-click", {
-            starAt,
-            endAt,
-            name,
-            status,
-          });
+          this.$emit("on-node-click", this.formInline);
         } else {
           return false;
         }
